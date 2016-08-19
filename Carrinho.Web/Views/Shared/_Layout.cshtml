@@ -1,0 +1,81 @@
+﻿@using Carrinho.Core
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - por Marcelo Ricardo de Oliveira</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body class="body">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" id="container-header">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logo"></div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div id="footer-social-links" class="footer-social-links">
+                <div class="footer-wrapper">
+                    <h2 class="walmart-footer-logo title"></h2>
+                    <ul class="social-list">
+                        <li class="social-items">
+                            <i class="wm-icon wm-icon-circle icon-facebook"></i><span class="social-name"></span>
+                        </li>
+                        <li class="social-items">
+                            <i class="wm-icon wm-icon-circle icon-twitter"></i><span class="social-name"></span>
+                        </li>
+                        <li class="social-items">
+                            <i class="wm-icon wm-icon-circle icon-google-plus"></i><span class="social-name"></span>
+                        </li>
+                        <li class="social-items">
+                            <i class="wm-icon wm-icon-circle icon-instagram"></i><span class="social-name"></span>
+                        </li>
+                        <li class="social-items">
+                            <i class="wm-icon wm-icon-circle icon-youtube"></i><span class="social-name"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="footer-institutional" class="footer-institutional">
+                <div class="footer-wrapper" itemscope="" itemtype="//schema.org/LocalBusiness">
+                    <p>
+                        <span itemprop="name">MARCELO RICARDO DE OLIVEIRA</span>
+                        <br><span itemprop="address" itemscope="" itemtype="//schema.org/PostalAddress">
+                            <span itemprop="streetAddress">Endereço: R N Sra. Mãe dos Homens, 987 - bloco 10 ap 202</span>, <span itemprop="addressLocality">Guarulhos</span>, <span itemprop="addressRegion">SP</span>, CEP <span itemprop="postalCode">07091-000</span>
+                            <br>
+                            <meta itemprop="addressCountry" content="BR">
+                        </span><a href="mclricardo@gmail.com" itemprop="email">mclricardo@gmail.com</a>
+                        <meta itemprop="telephone" content="99821-5929">
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="loading" class="loading" style="display: none;">Loading&#8230;</div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-locale_pt-br.js"></script>
+    <script src="~/Scripts/cart.js"></script>
+</body>
+</html>

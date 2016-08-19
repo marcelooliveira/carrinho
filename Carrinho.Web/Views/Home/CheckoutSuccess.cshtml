@@ -1,0 +1,107 @@
+﻿@using Carrinho.Core;
+
+@model Carrinho.Core.DTOs.CheckoutSummaryDTO
+
+@{
+    ViewBag.Title = "Teste Técnico";
+}
+
+<div class="checkout-success" ng-app="app" ng-controller="cart" ng-show=myCart>
+    <br />
+    <div class="success-icon text-center" width="32" height="32"></div>
+    <h3 class="text-center">
+        <span>Seu pedido foi enviado com sucesso! Obrigado por comprar no Walmart</span>
+    </h3>
+    <h4 class="text-center">
+        <span>Número do pedido:</span>
+        <span class="green">@Html.DisplayFor(m => m.OrderNumber)</span>
+    </h4>
+    <br />
+    <h3>
+        <span>Resumo do pedido:</span>
+    </h3>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>
+                        <span>Número do pedido:</span>
+                        <span class="green">@Html.DisplayFor(m => m.OrderNumber)</span>
+                    </h4>
+                    <p>
+                        Atenção: Você receberá um e-mail com a confirmação e todos os detalhes do seu pedido. Por favor, verifique as configurações AntiSpam do seu provedor de e-mail.
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Forma de pagamento</h4>
+                    <div class="boleto">
+                        <p><span class="glyphicon glyphicon-barcode"></span>Boleto bancário</p>
+                        <p class="offset30">@Html.DisplayFor(m => m.Total)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row gray row-eq-height border-top border-bottom">
+                <div class="col-md-3">
+                    <h4><span class="glyphicon glyphicon-user"></span>Seus dados</h4>
+                    <p class="offset30">@Html.DisplayFor(m => m.CustomerInfo.CustomerName)</p>
+                    <p class="offset30">@Html.DisplayFor(m => m.CustomerInfo.PhoneNumber)</p>
+                </div>
+                <div class="col-md-3 border-right">
+                    <br />
+                    <br />
+                    <p>@Html.DisplayFor(m => m.CustomerInfo.Email)</p>
+                </div>
+                <div class="col-md-6">
+                    <h4><span class="glyphicon glyphicon-home"></span>Endereço de entrega</h4>
+                    <p class="offset30">@Html.DisplayFor(m => m.CustomerInfo.DeliveryAddress)</p>
+                </div>
+            </div>
+            <div class="row gray">
+                <div class="col-md-6">
+                    <h4><span class="glyphicon glyphicon-gift"></span>Entrega</h4>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <p class="float-right">
+                        Entrega em até
+                        @Html.DisplayFor(m => m.DeliveryUpTo)
+                    </p>
+                </div>
+            </div>
+            <div class="row gray">
+                <div class="col-md-6">
+                    <p class="offset30"><b>Descrição do produto</b></p>
+                </div>
+                <div class="col-md-6 pull-right">
+                    <p><b class="float-right">Quantidade</b></p>
+                </div>
+            </div>
+            @foreach (var item in Model.CartItems)
+            {
+                <div class="row gray">
+                    <div class="col-md-6">
+                        <div class="offset30 truncate">
+                            <span>•</span>
+                            <span>@Html.DisplayFor(m => item.Description)</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pull-right">
+                        <p class="float-right">@Html.DisplayFor(m => item.Quantity)</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9"></div>
+        <a href="@Url.Action("Index", "Home")">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success">Voltar para lista de produtos</button>
+            </div>
+        </a>
+    </div>
+
+</div>
+

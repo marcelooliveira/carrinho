@@ -1,0 +1,127 @@
+﻿@using Carrinho.Core;
+@model Carrinho.Core.DTOs.NewProductDTO
+
+@{
+    ViewBag.Title = "Teste Técnico";
+}
+
+<div class="new-product">
+    <div class="row">
+        @using (Html.BeginForm("Submit", "NewProduct", FormMethod.Post,
+                                                 new
+                                                 {
+                                                     id = "newProductForm",
+                                                     @class = "form-horizontal",
+                                                     enctype = "multipart/form-data"
+                                                 }))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Cadastro de produto</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="inputName" class="col-md-4 control-label">Descrição</label>
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(f => f.Description, new
+                               {
+                                   type="text",
+                                   @class="form-control",
+                                   id ="inputName",
+                                   placeholder ="Descrição do produto",
+                                   required = "required"
+                               })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Preço unitário</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                @Html.TextBoxFor(f => f.UnitPrice, new
+                                   {
+                                        type = "number",
+                                        value = "10",
+                                        min = "0",
+                                        step = "0.01",
+                                        @data_number_to_fixed= "2",
+                                        @data_number_stepfactor = "100",
+                                        @class ="form-control currency",
+                                        id ="unit-price",
+                                        required = "required"
+                                   })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10"></div>
+            <div class="pull-right col-md-2">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-success">Criar Produto</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#numericForm')
+            .formValidation({
+                framework: 'bootstrap',
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    number: {
+                        validators: {
+                            numeric: {
+                                message: 'The value is not a number',
+                                // The default separators
+                                thousandsSeparator: '',
+                                decimalSeparator: '.'
+                            }
+                        }
+                    }
+                }
+            })
+            .on('change', '[name="country"]', function () {
+                var thousandsSeparator = '',
+                    decimalSeparator = '.';
+                switch ($(this).val()) {
+                    case 'en_US':
+                        thousandsSeparator = ',';
+                        decimalSeparator = '.';
+                        break;
+
+                    case 'fr_FR':
+                        thousandsSeparator = ' ';
+                        decimalSeparator = ',';
+                        break;
+
+                    case 'it_IT':
+                        thousandsSeparator = '.';
+                        decimalSeparator = ',';
+                        break;
+
+                    case '':
+                    default:
+                        thousandsSeparator = '';
+                        decimalSeparator = '.';
+                        break;
+                }
+
+                $('#numericForm')
+                    // Update the options
+                    .formValidation('updateOption', 'number', 'numeric', 'thousandsSeparator', thousandsSeparator)
+                    .formValidation('updateOption', 'number', 'numeric', 'decimalSeparator', decimalSeparator)
+                    // and revalidate the number
+                    .formValidation('revalidateField', 'number');
+            })
+    });
+</script>
