@@ -25,7 +25,7 @@ namespace Carrinho.Web
             string serverFilePath = Server.MapPath("~/cart.json");
             AutoFacHelper.Initialize(serverFilePath);
             var checkoutManager = AutoFacHelper.Resolve<ICheckoutManager>();
-            checkoutManager.CreateAndGetNewDataFile(serverFilePath);
+            checkoutManager.InitializeDB();
         }
     }
 }

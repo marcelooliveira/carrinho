@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.4.0.0\lib\net451\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -51,6 +58,7 @@
   <ItemGroup>
     <Compile Include="AutoFacHelper.cs" />
     <Compile Include="CheckoutManager.cs" />
+    <Compile Include="Contexto.cs" />
     <Compile Include="DiscountManager.cs" />
     <Compile Include="DTOs\CartDTO.cs" />
     <Compile Include="DTOs\CartItemDTO.cs" />
@@ -58,12 +66,15 @@
     <Compile Include="DTOs\CheckoutSummaryDTO.cs" />
     <Compile Include="DTOs\DiscountRuleDTO.cs" />
     <Compile Include="DTOs\NewProductDTO.cs" />
+    <Compile Include="Entities\CartItem.cs" />
     <Compile Include="ICheckoutManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

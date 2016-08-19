@@ -1,4 +1,5 @@
 ﻿using Carrinho.Core.DTOs;
+using Carrinho.Core.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -63,86 +64,54 @@ namespace Carrinho.Core
             };
         }
 
-        public void SaveCart(CartItemDTO modifiedItem)
+        public void SaveCart(CartItemDTO newOrEditItem)
         {
-            var cart = GetCart();
-            var cartItem = cart.CartItems.Where(i => i.SKU == modifiedItem.SKU).SingleOrDefault();
-            if (cartItem != null)
+            using (var db = new Contexto())
             {
-                cartItem.Quantity = modifiedItem.Quantity;
-                if (cartItem.Quantity == 0)
-                    cart.CartItems.Remove(cartItem);
-            }
-            else
-            {
-                cart.CartItems.Add(modifiedItem);
-            }
+                var cartItem = db.CartItem
+                    .Where(i => i.SKU == newOrEditItem.SKU)
+                    .SingleOrDefault();
 
-            using (StreamWriter sw = new StreamWriter(this.serverFilePath))
-            {
-                sw.Write(JsonConvert.SerializeObject(cart.CartItems));
+                if (cartItem != null)
+                {
+                    if (newOrEditItem.Quantity == 0)
+                        db.CartItem.Remove(cartItem);
+                    else
+                        cartItem.Quantity = newOrEditItem.Quantity;
+                }
+                else
+                {
+                    db.CartItem.Add(new CartItem
+                    {
+                        SKU = newOrEditItem.SKU,
+                        Description = newOrEditItem.Description,
+                        SoldAndDeliveredBy = newOrEditItem.SoldAndDeliveredBy,
+                        Price = newOrEditItem.Price,
+                        OldPrice = newOrEditItem.OldPrice,
+                        Quantity = newOrEditItem.Quantity
+                    });
+                }
+
+                db.SaveChanges();
             }
         }
 
         private List<CartItemDTO> GetCartItemsFromFile()
         {
-            List<CartItemDTO> cartItems;
-            if (!File.Exists(serverFilePath))
+            using (var db = new Contexto())
             {
-                cartItems = CreateAndGetNewDataFile(this.serverFilePath);
+                return db.CartItem.Select(ci =>
+                    new CartItemDTO
+                    {
+                        Id = ci.Id,
+                        SKU = ci.SKU,
+                        Description = ci.Description,
+                        SoldAndDeliveredBy = ci.SoldAndDeliveredBy,
+                        Price = ci.Price,
+                        OldPrice = ci.OldPrice,
+                        Quantity = ci.Quantity
+                    }).ToList();
             }
-            else
-            {
-                using (StreamReader sr = new StreamReader(this.serverFilePath, true))
-                {
-                    cartItems = JsonConvert.DeserializeObject<List<CartItemDTO>>(sr.ReadToEnd());
-                }
-            }
-
-            return cartItems;
-        }
-
-        public List<CartItemDTO> CreateAndGetNewDataFile(string serverFilePath)
-        {
-            var list = new List<CartItemDTO>
-            {
-                new CartItemDTO
-                {
-                    Id = 1,
-                    SKU = "000001",
-                    Description = "Headphone sem fio com Bluetooth MDR-ZX330BT - Único - Sony",
-                    SoldAndDeliveredBy = "Best Shop Brasil",
-                    Price = 387.99M,
-                    OldPrice = 399.99M,
-                    Quantity = 1
-                },
-                new CartItemDTO
-                {
-                    Id = 2,
-                    SKU = "000002",
-                    Description = "Console PS4 Sony Nacional com 500GB Preto - Sony",
-                    SoldAndDeliveredBy = "Walmart",
-                    Price = 1999.00M,
-                    OldPrice = 2299.00M,
-                    Quantity = 1
-                },
-                new CartItemDTO
-                {
-                    Id = 3,
-                    SKU = "000003",
-                    Description = "Jogo PS4 THE LAST OF US Remasterizado - Único - Sony",
-                    SoldAndDeliveredBy = "Shock Games",
-                    Price = 179.90M,
-                    Quantity = 1
-                }
-            };
-
-            using (StreamWriter sw = new StreamWriter(serverFilePath))
-            {
-                sw.WriteLine(JsonConvert.SerializeObject(list));
-            }
-
-            return list;
         }
 
         private CustomerInfoDTO GetDummyCustomerInfo()
@@ -154,6 +123,50 @@ namespace Carrinho.Core
                 Email = "johndoe@email.com",
                 DeliveryAddress = "Alameda Araguaia, 2751 - Barueri - SP, 06455-906"
             };
+        }
+
+        public Contexto InitializeDB()
+        {
+            var db = new Contexto();
+
+            if (!db.Database.Exists())
+            {
+                db.Database.CreateIfNotExists();
+
+                db.CartItem.Add(new CartItem
+                    {
+                        SKU = Guid.NewGuid().ToString(),
+                        Description = "Headphone sem fio com Bluetooth MDR-ZX330BT - Único - Sony",
+                        SoldAndDeliveredBy = "Best Shop Brasil",
+                        Price = 387.99M,
+                        OldPrice = 399.99M,
+                        Quantity = 1
+                    });
+
+
+                db.CartItem.Add(new CartItem
+                    {
+                        SKU = Guid.NewGuid().ToString(),
+                        Description = "Console PS4 Sony Nacional com 500GB Preto - Sony",
+                        SoldAndDeliveredBy = "Walmart",
+                        Price = 1999.00M,
+                        OldPrice = 2299.00M,
+                        Quantity = 1
+                    });
+
+                db.CartItem.Add(new CartItem
+                    {
+                        SKU = Guid.NewGuid().ToString(),
+                        Description = "Jogo PS4 THE LAST OF US Remasterizado - Único - Sony",
+                        SoldAndDeliveredBy = "Shock Games",
+                        Price = 179.90M,
+                        Quantity = 1
+                    });
+
+                db.SaveChanges();
+
+            }
+            return db;
         }
     }
 }

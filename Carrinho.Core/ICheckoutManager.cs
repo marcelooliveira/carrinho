@@ -8,7 +8,7 @@ namespace Carrinho.Core
         CartDTO GetCart();
         void SaveCart(CartItemDTO modifiedItem);
         CartDTO GetCart(List<CartItemDTO> cartItems);
-        List<CartItemDTO> CreateAndGetNewDataFile(string serverFilePath);
         CheckoutSummaryDTO GetCheckoutSummary();
+        Contexto InitializeDB();
     }
 }
