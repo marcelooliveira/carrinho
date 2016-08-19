@@ -8,7 +8,15 @@ A aplicação do Teste Técnico foi feita em 3 dias, e utiliza tecnologias com a
 
 A aplicação consiste de 3 views: Carrinho, Cadastro e Check-out.
 
-Carrinho: Para o layout foi usado Bootstrap 3, para o desenvolvimento rápido da aplicação. Alguns ajustes foram feitos no arquivo .css custom da aplicação para deixar o layout mais parecido com a imagem da proposta. O back-end é desenvolvido em Asp.Net MVC com Razor view engine. Os dados do carrinho são obtidos a partir de um arquivo JSON no servidor, emulando um banco de dados primitivo (obs.: o ideal seria um banco relacional como Sql Server, MySql ou Oracle, porém como a proposta não deixava claro como deveria ser a implementação do banco de dados, resolvi deixar essa parte a mais simples possível)  O cliente utiliza JavaScript, jQuery e o framework AngularJS para realizar os bindings entre HTML e os dados.
+Carrinho: Para o layout foi usado Bootstrap 3, para o desenvolvimento rápido da aplicação. Alguns ajustes foram feitos no arquivo .css custom da aplicação para deixar o layout mais parecido com a imagem da proposta. O back-end é desenvolvido em Asp.Net MVC com Razor view engine. Os dados do carrinho são obtidos a partir de um banco de dados Sql Server que é criado a partir de uma implementação Code First do Entity Framework. 
+
+IMPORTANTE: É necessário criar/modificar a configuração da string de conexáo (Sql Server) de banco de dados no arquivo web.config que está na pasta raiz. Essa configuração exige que o usuário tenha permissão para criar banco de dados no servidor especificado:
+
+  <connectionStrings>
+    <add name="Contexto" providerName="System.Data.SqlClient" connectionString="data source=(LocalDB)\local; initial catalog=Carrinho; Trusted_Connection=True;" />
+  </connectionStrings>
+
+O cliente utiliza JavaScript, jQuery e o framework AngularJS para realizar os bindings entre HTML e os dados.
 
 
 Tanto os botões “spinner” para incrementar/decrementar as quantidades, quanto a caixa de texto numérica das quantidades acionam uma chamada POST a um controller WebApi, que recalcula todos os dados do carrinho e retorna o subtotal, o desconto e o valor total do pedido.
