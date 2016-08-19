@@ -2,6 +2,8 @@ Teste Técnico - Marcelo Ricardo de Oliveira
 
 Código fonte: https://github.com/marcelooliveira/carrinho  (faça download do .zip e abra a solução usando Visual Studio 2015.)
 
+IMPORTANTE: abra o manual com imagens das telas em: https://docs.google.com/document/d/1Uq8TL_aSG96RNyEg9U33BcqYyW4FefGGJJdaZoktvRU/edit?usp=sharing
+
 A aplicação do Teste Técnico foi feita em 3 dias, e utiliza tecnologias com as quais tenho experiência: Asp.Net MVC, C#, Asp.Net Web Api, JavaScript, jQuery, AngularJS e Bootstrap.
 
 A aplicação consiste de 3 views: Carrinho, Cadastro e Check-out.
