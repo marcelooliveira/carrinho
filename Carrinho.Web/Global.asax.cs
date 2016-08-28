@@ -10,6 +10,8 @@ using System.Web.Http;
 using Autofac;
 using Carrinho.Core;
 using Autofac.Core;
+using Carrinho.Web.App_Start;
+using System.Web.Optimization;
 
 namespace Carrinho.Web
 {
@@ -21,6 +23,7 @@ namespace Carrinho.Web
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             string serverFilePath = Server.MapPath("~/cart.json");
             AutoFacHelper.Initialize(serverFilePath);

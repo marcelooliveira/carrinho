@@ -66,6 +66,9 @@ namespace Carrinho.Core
 
         public void SaveCart(CartItemDTO newOrEditItem)
         {
+            if (newOrEditItem.Quantity < 0)
+                newOrEditItem.Quantity = 0;
+
             using (var db = new Contexto())
             {
                 var cartItem = db.CartItem

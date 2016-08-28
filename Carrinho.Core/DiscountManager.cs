@@ -33,7 +33,7 @@ namespace Carrinho.Core
 
         public DiscountRuleDTO GetDiscount(decimal subtotal)
         {
-            return Discounts.Where(d => d.CheckRange(subtotal)).First();
+            return Discounts.Where(d => d.CheckRange(subtotal)).FirstOrDefault();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace Carrinho.Web.WebApi
 {
@@ -40,6 +41,7 @@ namespace Carrinho.Web.WebApi
         }
 
         // POST: api/Cart
+        [OutputCache(NoStore = true)]
         public CartDTO Post([FromBody]CartItemDTO value)
         {
             var cart = checkoutManager.GetCart();

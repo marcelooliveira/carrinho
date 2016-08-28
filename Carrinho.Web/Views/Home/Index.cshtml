@@ -1,120 +1,22 @@
-﻿
+﻿@using System.Web.Optimization
+@using System.Collections.Generic
+@model Carrinho.Core.DTOs.CartDTO
 @{
-    ViewBag.Title = "Teste Técnico";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="cart" ng-app="app" ng-controller="cart" ng-show=myCart>
+@Html.React("CartView", new
+{
+    title = "React JS.Net + React-Bootstrap",
+    model = Model,
+    urlNewProduct = @Url.Action("NewProduct", "Home" ),
+    urlCheckoutSuccess = @Url.Action("CheckoutSuccess", "Home")
+})
 
-    <div ng-show="myCart.cartItems.length > 0">
-        <h2>
-            Meu carrinho (<ng-pluralize count="myCart.cartItems.length"
-                                        when="{'0': '', 'one': '1 item', 'other': '{} itens'}">
-            </ng-pluralize>)
-        </h2>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/react/react.min.js"></script>
+<script src="~/Scripts/react/react-dom.min.js"></script>
+<script src="~/Scripts/react/react-with-addons.min.js"></script>
+@Scripts.Render(" ~/bundles/main")
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="row vertical-align">
-                    <div class="col-md-6 justify-left">item(s)</div>
-                    <div class="col-md-2 justify-center">preço</div>
-                    <div class="col-md-2 justify-center">quantidade</div>
-                    <div class="col-md-2 justify-right">subtotal</div>
-                </div>
-            </div>
-            <div class="panel-body my-children-have-dividers">
-                <div class="row vertical-align" ng-repeat="item in myCart.cartItems">
-                    <div class="col-md-6 justify-left">
-                        <div class="row fullwidth">
-                            <div class="col-md-3">
-                                <img src="~/Images/product.png" />
-                            </div>
-                            <div class="col-md-9">
-                                <span ng-bind="item.Description"></span>
-                                <span ng-bind="item.SoldAndDeliveredBy"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 green justify-center" ng-bind="item.Price | currency:'R$'">
-                    </div>
-                    <div class="col-md-2 justify-center">
-                        <div class="text-center">
-                            <div class="btn-group" role="group">
-                                <input type="button" class="btn btn-default" value="-" ng-click="decrement(item)" />
-                                <input type="text" class="btn" ng-model="item.Quantity" ng-blur="onQuantityChanged($event, item)" />
-                                <input type="button" class="btn btn-default" value="+" ng-click="increment(item)" />
-                            </div>
-                            <a ng-click="changeQuantity(item, 0)" class="remove pointer">Remover</a>
-                        </div>
-                    </div>
-                    <div class="col-md-2 green justify-right" ng-bind="item.Subtotal | currency:'R$'">
-                    </div>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-sm-8"></div>
-                    <div class="col-sm-4 my-children-have-dividers">
-                        <div class="row vertical-align">
-                            <div class="col-sm-8 justify-right">
-                                Subtotal (<ng-pluralize count="myCart.cartItems.length"
-                                                        when="{'0': '', 'one': '1 item', 'other': '{} itens'}">
-                                </ng-pluralize>):
-                            </div>
-                            <div class="col-sm-4 green justify-right">
-                                <span ng-bind="myCart.Subtotal | currency:'R$'"></span>
-                            </div>
-                        </div>
-
-                        <div class="row vertical-align" ng-show="myCart.DiscountRate">
-                            <div class="col-sm-8 justify-right">
-                                Desconto (<span ng-bind="myCart.DiscountRate"></span>%):
-                            </div>
-                            <div class="col-sm-4 green justify-right">
-                                <span ng-bind="myCart.DiscountValue | currency:'R$'"></span>
-                            </div>
-                        </div>
-                        <div class="row vertical-align">
-                            <div class="col-sm-12 justify-right"><h3>Valor total: <span class="green" ng-bind="myCart.Total | currency:'R$'"></span></h3></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-2 pull-left">
-                <a href="@Url.Action("NewProduct", "Home")" ng-show="myCart.CanFinishOrder()">
-                    <button type="button" class="btn btn-success">Cadastrar novo produto</button>
-                </a>
-            </div>
-            <div class="col-lg-6"></div>
-            <div class="col-lg-2 pull-right">
-                <a href="@Url.Action("CheckoutSuccess", "Home")" ng-show="myCart.CanFinishOrder()">
-                    <button type="button" class="btn btn-success" ng-disabled="!myCart.CanFinishOrder()">Finalizar compra</button>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div ng-hide="myCart.cartItems.length > 0">
-        <div>
-            <h1><br /><br />:(</h1>
-            <div>
-                <h1>
-                    Ops! Seu carrinho está vazio.
-                </h1>
-                <br />
-                <div class="empty-cart-content-message">
-                    Cadastre novos produtos para continuar comprando.
-                </div>
-                <br />
-                <div>
-                    <a href="@Url.Action("NewProduct", "Home")" ng-show="myCart.CanFinishOrder()">
-                        <button type="button" class="btn btn-success">Cadastrar novo produto</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+@Html.ReactInitJavaScript()

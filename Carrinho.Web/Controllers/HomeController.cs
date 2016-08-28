@@ -1,4 +1,5 @@
 ﻿using Carrinho.Core;
+using Carrinho.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace Carrinho.Web.Controllers
     public class HomeController : Controller
     {
         readonly ICheckoutManager checkoutManager;
+
+        private static IList<CommentModel> _comments;
 
         public HomeController()
         {
@@ -23,7 +26,7 @@ namespace Carrinho.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(checkoutManager.GetCart());
         }
 
         public ActionResult CheckoutSuccess()
@@ -37,5 +40,4 @@ namespace Carrinho.Web.Controllers
         }
     }
 }
-
 

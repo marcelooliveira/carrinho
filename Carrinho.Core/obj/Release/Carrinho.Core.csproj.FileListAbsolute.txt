@@ -1,0 +1,13 @@
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Carrinho.Core.dll.config
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Carrinho.Core.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Carrinho.Core.pdb
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Autofac.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\EntityFramework.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\EntityFramework.SqlServer.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Newtonsoft.Json.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Autofac.xml
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\EntityFramework.xml
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\EntityFramework.SqlServer.xml
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\bin\Release\Newtonsoft.Json.xml
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\obj\Release\Carrinho.Core.dll
+C:\mclricardo.visualstudio.com\CodeProject\Carrinho\Carrinho.Core\obj\Release\Carrinho.Core.pdb
