@@ -45,15 +45,15 @@ var CartItem = React.createClass({
     removeItem: function () {
         this.postQuantity(0);
     },
-    postQuantity: function (quantity, callback) {
+postQuantity: function (quantity, callback) {
         $('.overlay').show();
         $.post('/api/Cart',
         {
             SKU: this.props.model.SKU,
             Quantity: quantity,
             Price: this.props.model.Price
-        }).done(function (data) {
-            $('.overlay').hide();
+        })
+        .done(function (data) {
             for (var item of data.CartItems) {
                 if (item.SKU == this.props.model.SKU) {
                     this.updateState({ Quantity: item.Quantity, Subtotal: item.Subtotal });
@@ -61,7 +61,10 @@ var CartItem = React.createClass({
                     return;
                 }
             }
-        }.bind(this));
+        }.bind(this))
+        .always(function () {
+            $('.overlay').hide();
+        });;
     },
     handleQuantityChanged: function (event) {
         var newQty = 1;
